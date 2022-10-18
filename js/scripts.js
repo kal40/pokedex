@@ -18,7 +18,22 @@ let pokemonRepository = (function () {
   ];
 
   let add = function (item) {
-    pokemonList.push(item);
+    //input verification
+    const requiredKeys = ["name", "height", "types"];
+    let inputKeys = Object.keys(item);
+    if (typeof item === "object" && inputKeys.length !== 0) {
+      for (let index = 0; index < inputKeys.length; index++) {
+        if (inputKeys[index] !== requiredKeys[index]) {
+          console.log("Not proper keys are used.");
+          return;
+        }
+      }
+      //adding the item after verification
+      pokemonList.push(item);
+    } else {
+      console.log("Not an object or empty object.");
+      return;
+    }
   };
 
   let getAll = function () {
