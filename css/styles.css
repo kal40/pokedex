@@ -112,3 +112,17 @@ p {
   text-align: left;
   margin: 5px 0px;
 }
+
+.loading-message {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-secondary);
+  color: inherit;
+  transition: background-color 1s;
+  width: 100%;
+  text-align: center;
+  margin: 5px 0px;
+}

@@ -1,38 +1,12 @@
 let pokemonRepository = (function () {
-  let pokemonList = [
-    {
-      name: "Bulbasaur",
-      height: 0.7,
-      types: ["Monster", "Grass"],
-    },
-    {
-      name: "Charmander",
-      height: 0.6,
-      types: ["Monster", "Dragon"],
-    },
-    {
-      name: "Squirtle",
-      height: 0.5,
-      types: ["Monster", "Water 1"],
-    },
-  ];
+  let pokemonList = [];
+  let apiUrl = "https://pokeapi.co/api/v2/pokemon/";
 
-  let add = function (item) {
-    //input verification
-    const requiredKeys = ["name", "height", "types"];
-    let inputKeys = Object.keys(item);
-    if (typeof item === "object" && inputKeys.length !== 0) {
-      for (let index = 0; index < inputKeys.length; index++) {
-        if (inputKeys[index] !== requiredKeys[index]) {
-          console.log("Not proper keys are used.");
-          return;
-        }
-      }
-      //adding the item after verification
-      pokemonList.push(item);
+  let add = function (pokemon) {
+    if (typeof pokemon === "object" && "name" in pokemon) {
+      pokemonList.push(pokemon);
     } else {
-      console.log("Not an object or empty object.");
-      return;
+      console.log("Pokemon object is not correct.");
     }
   };
 
@@ -57,17 +31,56 @@ let pokemonRepository = (function () {
     return pokemonList;
   };
 
+  let loadList = function () {
+    return fetch(apiUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        json.results.forEach(function (item) {
+          let pokemon = {
+            name: item.name,
+            detailUrl: item.url,
+          };
+          add(pokemon);
+        });
+      })
+      .catch(function (error) {
+        console.error(`Something went wrong: ${error}`);
+      });
+  };
+
+  let loadDetails = function (pokemon) {
+    return fetch(pokemon.detailUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        pokemon.imgUrl = json.sprites.front_default;
+        pokemon.height = json.height;
+      })
+      .catch(function (error) {
+        consol.error(`Oh, something went wrong: ${error}`);
+      });
+  };
+
   let showDetails = function (pokemon) {
-    console.log(pokemon.name);
+    loadDetails(pokemon).then(function () {
+      console.log(pokemon);
+    });
   };
 
   return {
     add: add,
     addListItem: addListItem,
+    loadList: loadList,
+    loadList: loadList,
     getAll: getAll,
   };
 })();
 
-pokemonRepository.getAll().forEach(function (pokemon) {
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
 });
