@@ -77,7 +77,7 @@ nav {
 #liveAlertPlaceholder {
   position: fixed;
   top: 80px;
-  left: 400px;
-  right: 400px;
+  left: 350px;
+  right: 350px;
   z-index: 2;
 }
