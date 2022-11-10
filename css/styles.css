@@ -5,7 +5,7 @@
 }
 
 body {
-  padding-top: 70px;
+  padding-top: 75px;
   background-color: var(--color-primary);
   color: var(--color-secondary);
 }
@@ -72,5 +72,12 @@ nav {
 }
 
 /* ===============================================================================
- === 
+ === Alert
  =============================================================================== */
+#liveAlertPlaceholder {
+  position: fixed;
+  top: 80px;
+  left: 400px;
+  right: 400px;
+  z-index: 2;
+}

@@ -14,7 +14,7 @@ let pokemonRepository = (function () {
     if (typeof pokemon === 'object' && 'name' in pokemon) {
       pokemonList.push(pokemon)
     } else {
-      console.log('Pokemon object is not correct.')
+      console.error('Pokemon object is not correct.')
     }
   }
 
@@ -47,7 +47,6 @@ let pokemonRepository = (function () {
     card.appendChild(divCardBody)
 
     pokemonList.appendChild(card)
-    console.log(index)
   }
 
   let getAll = function () {
@@ -146,10 +145,7 @@ let pokemonRepository = (function () {
   searchForm.addEventListener('search', pokemonSearch)
 
   function pokemonSearch(event) {
-    let pokemonCards = document.querySelectorAll('.card')
     const searchString = event.target.value.toLowerCase()
-    console.log(searchString)
-    console.log(pokemonCards)
     let filteredPokemonList = pokemonList.filter((pokemon) => {
       return pokemon.name.toLowerCase().includes(searchString)
     })
@@ -168,6 +164,37 @@ let pokemonRepository = (function () {
   function hideLoadingMessage() {
     let loader = document.querySelector('.loader')
     loader.classList.add('hidden')
+  }
+
+  // ===============================================================================
+  // === Alerts
+  // ===============================================================================
+
+  let alertTrigger = function () {
+    alert('There is no internet connection', 'danger')
+  }
+
+  let alertDismiss = function () {
+    const alert = bootstrap.Alert.getOrCreateInstance('#alert')
+    alert.close()
+  }
+
+  window.addEventListener('offline', alertTrigger)
+
+  window.addEventListener('online', alertDismiss)
+
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+  const alert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible fade show" id="alert" role="alert">`,
+      `   <div>${message}</div>`,
+      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      '</div>',
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
   }
 
   // ===============================================================================
