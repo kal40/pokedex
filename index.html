@@ -24,6 +24,7 @@
         <a class="navbar-brand" href="#"
           ><img src="img/pokemon.svg" width="32" height="32" alt="pokemon-logo"
         /></a>
+        <h1>Pokedex</h1>
         <button
           class="navbar-toggler"
           type="button"
@@ -40,21 +41,21 @@
 
           <form class="d-flex" role="search">
             <input
+              id="searchbar"
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              incremental
             />
-            <button class="btn btn-outline-light" type="submit">Search</button>
           </form>
         </div>
       </div>
     </nav>
     <main class="container-fluid">
-      <h1>Pokedex</h1>
-      <div
-        class="row row-cols-auto g-4 justify-content-around pokemon-list"
-      ></div>
+      <div class="row row-cols-auto g-2 justify-content-around pokemon-list">
+        <div class="loader hidden"></div>
+      </div>
     </main>
 
     <!-- Modal -->
@@ -66,7 +67,7 @@
             <h5 class="modal-title">Modal title</h5>
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn-close-white"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>

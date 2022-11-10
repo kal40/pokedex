@@ -5,14 +5,22 @@
 }
 
 body {
-  padding-top: 58px;
+  padding-top: 70px;
   background-color: var(--color-primary);
   color: var(--color-secondary);
 }
 
 h1 {
   font-weight: 700;
-  padding: 1rem;
+  margin-bottom: 0;
+}
+
+nav {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 150%
+  );
 }
 
 .btn-outline-light {
@@ -21,6 +29,11 @@ h1 {
 
 .card {
   --bs-card-color: var(--color-grey);
+  --bs-card-title-spacer-y: 1rem;
+}
+
+.hidden {
+  display: none;
 }
 
 .modal {
@@ -31,5 +44,33 @@ h1 {
   --bs-modal-footer-border-color: var(--color-grey);
 }
 
-.modal-title {
+/* ===============================================================================
+ === Loader
+ =============================================================================== */
+
+.loader {
+  position: fixed;
+  z-index: 2000;
+  top: 80px;
+  left: auto;
+  right: auto;
+  border: 5px solid var(--color-secondary);
+  border-top: 5px solid var(--color-grey);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  animation: spin 2s linear infinite;
 }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===============================================================================
+ === 
+ =============================================================================== */
