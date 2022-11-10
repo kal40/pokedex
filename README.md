@@ -4,7 +4,7 @@
 
 This is a small web application with HTML, CSS, and JavaScript that loads Pokemon's data from an external [API](https://pokeapi.co/api/v2/ability/?limit=99) and enables the viewing of data points in detail.
 
-This site was built using [GitHub Pages](https://pages.github.com/)and can be viewed here: [Pokedex](https://kal40.github.io/pokedex/)
+This site was built using [GitHub Pages](https://pages.github.com/) and can be viewed here: [Pokedex](https://kal40.github.io/pokedex/)
 
 The main purpose of this app is to present how I create the architecture of a JavaScript app, as well as how I test and debug my code.
 
