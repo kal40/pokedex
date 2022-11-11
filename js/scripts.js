@@ -6,7 +6,8 @@ let pokemonRepository = (function () {
   // ===============================================================================
 
   let pokemonList = [];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=99';
+  let pokemonQuantity = 99;
+  let apiUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${pokemonQuantity}`;
 
   // ===============================================================================
   // === App
@@ -219,31 +220,78 @@ let pokemonRepository = (function () {
   // === Touch interactions
   // ===============================================================================
 
+  let modal = document.querySelector('.modal-content');
+  let touchstartX = 0;
+  let touchstartY = 0;
+  let touchendX = 0;
+  let touchendY = 0;
+
+  function handleGesture(touchstartX, touchstartY, touchendX, touchendY) {
+    const delx = touchendX - touchstartX;
+    const dely = touchendY - touchstartY;
+    if (Math.abs(delx) > Math.abs(dely)) {
+      if (delx > 0) return 'right';
+      else return 'left';
+    } else if (Math.abs(delx) < Math.abs(dely)) {
+      if (dely > 0) return 'down';
+      else return 'up';
+    } else return 'tap';
+  }
+
+  modal.addEventListener(
+    'touchstart',
+    function (event) {
+      touchstartX = event.changedTouches[0].screenX;
+      touchstartY = event.changedTouches[0].screenY;
+    },
+    false
+  );
+
+  modal.addEventListener(
+    'touchend',
+    function (event) {
+      touchendX = event.changedTouches[0].screenX;
+      touchendY = event.changedTouches[0].screenY;
+      if (
+        handleGesture(touchstartX, touchstartY, touchendX, touchendY) ==
+          'right' &&
+        modalPokemonIndex < pokemonQuantity
+      ) {
+        modalPokemonIndex += 1;
+        loadMoreDetails(pokemonList[modalPokemonIndex]).then(loadModal);
+      }
+      if (
+        handleGesture(touchstartX, touchstartY, touchendX, touchendY) ==
+          'left' &&
+        modalPokemonIndex > 1
+      ) {
+        modalPokemonIndex -= 1;
+        loadMoreDetails(pokemonList[modalPokemonIndex]).then(loadModal);
+      }
+    },
+    false
+  );
+
   // ===============================================================================
   // === Modal
   // ===============================================================================
 
-  const pokemonModal = document.getElementById('pokemon-modal');
-  let modalPokemonIndex = 0;
-  pokemonModal.addEventListener('show.bs.modal', (event) => {
-    const button = event.relatedTarget;
-    modalPokemonIndex = button.getAttribute('data-bs-modalPokemonIndex');
-    loadMoreDetails(pokemonList[modalPokemonIndex]).then(function () {
-      const modalTitle = pokemonModal.querySelector('.modal-title');
-      const modalBodyInput = pokemonModal.querySelector('.modal-body');
-      modalTitle.innerText = pokemonList[modalPokemonIndex].name;
-      modalBodyInput.innerHTML = `
+  let loadModal = function () {
+    const modalTitle = pokemonModal.querySelector('.modal-title');
+    const modalBodyInput = pokemonModal.querySelector('.modal-body');
+    modalTitle.innerText = pokemonList[modalPokemonIndex].name;
+    modalBodyInput.innerHTML = `
       <div class="container-fluid">
         <div class="row row-cols-auto justify-content-center">
           <div class="col-5">
             <img src="${pokemonList[modalPokemonIndex].imgFrontUrl}" alt="${
-        pokemonList[modalPokemonIndex].name
-      }" width=100%>
+      pokemonList[modalPokemonIndex].name
+    }" width=100%>
           </div>
           <div class="col-5">
             <img src="${pokemonList[modalPokemonIndex].imgBackUrl}"  alt="${
-        pokemonList[modalPokemonIndex].name
-      }"  width=100%>
+      pokemonList[modalPokemonIndex].name
+    }"  width=100%>
           </div>
         </div>
         <div class="row">
@@ -255,8 +303,16 @@ let pokemonRepository = (function () {
         </div>
       </div>
         `;
-      hideLoadingMessage();
-    });
+    hideLoadingMessage();
+  };
+
+  const pokemonModal = document.getElementById('pokemon-modal');
+  let modalPokemonIndex = 0;
+
+  pokemonModal.addEventListener('show.bs.modal', (event) => {
+    const button = event.relatedTarget;
+    modalPokemonIndex = button.getAttribute('data-bs-modalPokemonIndex');
+    loadMoreDetails(pokemonList[modalPokemonIndex]).then(loadModal);
   });
 
   pokemonModal.addEventListener('hidden.bs.modal', () => {

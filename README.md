@@ -15,7 +15,7 @@ The main purpose of this app is to present how I create the architecture of a Ja
 - Each card includes a button to load more details about the Pokemon
 - Live search among the loaded Pokemons
 - Loading indicator during data fetching
-- Swiping between items on the modal
+- On devices with touchscreen swiping between items on the modal
 
 ## Dependences
 
