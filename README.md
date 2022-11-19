@@ -20,7 +20,7 @@ git clone https://github.com/kal40/pokedex.git
 
 ## Deployment
 
-Create a GithHub account if you dont't have one and fork my repository. Then on GitHub go to your forked repository and under the `Settings -> Pages -> Build and deployment -> Branch` choose hte master barnch and `Save`. After a minute you can check your live copy of my app.
+Create a GithHub account if you dont't have one and fork my repository. Then on GitHub go to your forked repository and under the `Settings -> Pages -> Build and deployment -> Branch` choose the master branch and `Save`. After a minute you can check your live copy of my app.
 
 Or,
 
