@@ -146,27 +146,22 @@ let pokemonRepository = (function () {
     return abilities;
   };
 
-  function pokemonListCardsFilter(filteredPokemonList) {
-    pokemonList.forEach(function (pokemon) {
-      if (filteredPokemonList.includes(pokemon)) {
-        let pokemonCard = document.querySelector(`#${pokemon.name}-card`);
-        pokemonCard.classList.remove('hidden');
-      } else {
-        let pokemonCard = document.querySelector(`#${pokemon.name}-card`);
-        pokemonCard.classList.add('hidden');
-      }
-    });
-  }
   // ===============================================================================
   // === Load more pokemon as demanded
   // ===============================================================================
   window.addEventListener('scroll', function () {
-    let lastCardImg = document.querySelector(
-      `#${pokemonList[pokemonApiOffset + pokemonApiLimit - 1].name}-card img`
-    );
-    if (isInViewport(lastCardImg)) {
-      loadMorePokemon();
-    }
+    this.setTimeout(() => {
+      let searchBar = document.querySelector('#searchbar');
+      if (searchBar.value == '') {
+        if (isLastCardInViewport()) loadMorePokemon();
+      }
+    }, 100);
+  });
+
+  window.addEventListener('resize', function () {
+    this.setTimeout(() => {
+      if (isLastCardInViewport()) loadMorePokemon();
+    }, 100);
   });
 
   let loadMorePokemon = function () {
@@ -178,6 +173,13 @@ let pokemonRepository = (function () {
         loadCardDeatils(pokemon);
       });
     });
+  };
+
+  let isLastCardInViewport = function () {
+    let lastCardImg = document.querySelector(
+      `#${pokemonList[pokemonApiOffset + pokemonApiLimit - 1].name}-card img`
+    );
+    return isInViewport(lastCardImg);
   };
 
   let isInViewport = function (elem) {
@@ -219,6 +221,18 @@ let pokemonRepository = (function () {
     } else {
       alertDismiss('alertNoSearchResult');
     }
+  }
+
+  function pokemonListCardsFilter(filteredPokemonList) {
+    pokemonList.forEach(function (pokemon) {
+      if (filteredPokemonList.includes(pokemon)) {
+        let pokemonCard = document.querySelector(`#${pokemon.name}-card`);
+        pokemonCard.classList.remove('hidden');
+      } else {
+        let pokemonCard = document.querySelector(`#${pokemon.name}-card`);
+        pokemonCard.classList.add('hidden');
+      }
+    });
   }
 
   // ===============================================================================
@@ -422,8 +436,6 @@ let pokemonRepository = (function () {
     modalBodyInput.appendChild(modalBodyContainer);
     hideLoadingMessage();
   };
-
-  // const pokemonModal = document.getElementById('pokemon-modal');
 
   pokemonModal._element.addEventListener('show.bs.modal', (event) => {
     const button = event.relatedTarget;
