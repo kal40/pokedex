@@ -328,9 +328,14 @@ let pokemonRepository = (function () {
       if (
         handleGesture(touchstartX, touchstartY, touchendX, touchendY) ==
           'right' &&
-        pokemonIndex < pokemonList.length - 1
+        pokemonIndex > 0
       ) {
-        pokemonIndex += 1;
+        const modalTitle = pokemonModal._element.querySelector('.modal-title');
+        const modalBodyInput =
+          pokemonModal._element.querySelector('.modal-body');
+        modalTitle.innerText = '';
+        modalBodyInput.innerHTML = '';
+        pokemonIndex -= 1;
         loadMoreDetails(pokemonList[pokemonIndex]).then(() => {
           loadModal(pokemonIndex);
         });
@@ -338,9 +343,14 @@ let pokemonRepository = (function () {
       if (
         handleGesture(touchstartX, touchstartY, touchendX, touchendY) ==
           'left' &&
-        pokemonIndex > 0
+        pokemonIndex < pokemonList.length - 1
       ) {
-        pokemonIndex -= 1;
+        const modalTitle = pokemonModal._element.querySelector('.modal-title');
+        const modalBodyInput =
+          pokemonModal._element.querySelector('.modal-body');
+        modalTitle.innerText = '';
+        modalBodyInput.innerHTML = '';
+        pokemonIndex += 1;
         loadMoreDetails(pokemonList[pokemonIndex]).then(() => {
           loadModal(pokemonIndex);
         });
@@ -352,6 +362,10 @@ let pokemonRepository = (function () {
   // ===============================================================================
   // === Modal
   // ===============================================================================
+
+  const pokemonModal = new bootstrap.Modal(
+    document.getElementById('pokemon-modal')
+  );
 
   let loadModal = function (pokemonIndex) {
     const modalTitle = pokemonModal._element.querySelector('.modal-title');
@@ -410,9 +424,6 @@ let pokemonRepository = (function () {
   };
 
   // const pokemonModal = document.getElementById('pokemon-modal');
-  const pokemonModal = new bootstrap.Modal(
-    document.getElementById('pokemon-modal')
-  );
 
   pokemonModal._element.addEventListener('show.bs.modal', (event) => {
     const button = event.relatedTarget;
