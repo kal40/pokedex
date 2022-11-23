@@ -51,5 +51,5 @@ All dependencies are included in the code, no need to install anything else.
 
 ## Future improvements
 
-- Extended the information appears on the modal by adding the proper pokemon object keys to the `loadMoreDetails` function and then adding the same key's value to the `modalBody.innerHtml`.
+- Extend the information appears on the modal by adding the proper pokemon object keys to the `loadMoreDetails` function and then adding the same key's value to the `modalBody.innerHtml`.
 - Load all pokemon names to allow search among all of them, not just among the onces that have already been loaded on the page.
