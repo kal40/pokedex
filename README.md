@@ -8,7 +8,7 @@ The main purpose of this app is to present how I create the architecture of a Ja
 
 This site was built using [GitHub Pages](https://pages.github.com/).
 
-[LIVE DEMO](https://kal40.github.io/pokedex/)
+[LIVE DEMO](https://pokedex.smartcoder.dev/)
 
 ## Getting started
 
@@ -49,7 +49,7 @@ All dependencies are included in the code, no need to install anything else.
 - ESLint was used for code quality and Prettier for code formatting.
 - The app was tested on different screen sizes with Chrome developer tools.
 
-## Scalability
+## Future improvements
 
-The number of Pokemons can be changed with the number at the end of the `apiURL` global variable.
-The Pokemon's additional details on the modal can be extended by adding the proper pokemon object keys to the `loadMoreDetails` function and then adding the same keys to the `modalBody.innerHtml`.
+- Extended the information appears on the modal by adding the proper pokemon object keys to the `loadMoreDetails` function and then adding the same key's value to the `modalBody.innerHtml`.
+- Load all pokemon names to allow search among all of them, not just among the onces that have already been loaded on the page.
