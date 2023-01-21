@@ -4,7 +4,7 @@
 
 This is a small web application with HTML, CSS, and JavaScript that loads Pokemon's data from an external [API](https://pokeapi.co/api/v2/pokemon/) and enables the viewing of data points in detail.
 
-The main purpose of this app is to present how I create the architecture of a JavaScript app, as well as how I test and debug my code.
+The main purpose of this app is to present how I create a JavaScript app.
 
 This site was built using [GitHub Pages](https://pages.github.com/).
 
