@@ -10,6 +10,15 @@ This site was built using [GitHub Pages](https://pages.github.com/).
 
 [LIVE DEMO](https://pokedex.smartcoder.dev/)
 
+## Key Features
+
+- Load data from an external source ([API](https://pokeapi.co/docs/v2))
+- View all loaded Pokemon through individual cards on a responsive webpage
+- Each card includes a button to load more details about the Pokemon
+- Live search among the loaded Pokemons
+- Loading indicator during data fetching
+- On devices with touchscreen swiping between items on the modal
+
 ## Getting started
 
 Clone the repository:
@@ -25,15 +34,6 @@ Create a GithHub account if you dont't have one and fork my repository. Then on 
 Or,
 
 just clone the [repository](https://github.com/kal40/pokedex.git) into your webserver's root directory on any hosting provider.
-
-## Key Features
-
-- Load data from an external source ([API](https://pokeapi.co/docs/v2))
-- View all loaded Pokemon through individual cards on a responsive webpage
-- Each card includes a button to load more details about the Pokemon
-- Live search among the loaded Pokemons
-- Loading indicator during data fetching
-- On devices with touchscreen swiping between items on the modal
 
 ## Dependencies
 
